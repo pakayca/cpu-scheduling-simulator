@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS CPU Scheduler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>⚙️ System.Scheduler</h1>
+                <p>Advanced CPU Scheduling Algorithm Visualizer</p>
+            </div>
+        </header>
+
+        <main>
+            <section class="panel">
+                <div class="section-header">
+                    <h2>Configuration</h2>
+                </div>
+                
+                <div class="controls">
+                    <div class="input-group">
+                        <label for="algorithm">Algorithm</label>
+                        <select id="algorithm">
+                            <option value="FCFS">First-Come, First-Served (FCFS)</option>
+                            <option value="SJF">Shortest Job First (SJF - Non-Preemptive)</option>
+                            <option value="SRTF">Shortest Remaining Time First (SRTF)</option>
+                            <option value="RR">Round Robin (RR)</option>
+                        </select>
+                    </div>
+                    
+                    <div id="quantum-container" class="input-group hidden">
+                        <label for="quantum">Time Quantum</label>
+                        <input type="number" id="quantum" min="1" value="2">
+                    </div>
+                </div>
+
+                <div class="add-process-box">
+                    <div class="input-group">
+                        <label>Process ID</label>
+                        <input type="text" id="p-name" placeholder="P1" value="P1">
+                    </div>
+                    <div class="input-group">
+                        <label>Arrival Time</label>
+                        <input type="number" id="arr-time" min="0" value="0">
+                    </div>
+                    <div class="input-group">
+                        <label>Burst Time</label>
+                        <input type="number" id="burst-time" min="1" value="5">
+                    </div>
+                    <button id="add-btn" class="btn btn-outline">+ Add Process</button>
+                </div>
+
+                <div class="table-container">
+                    <table id="process-table">
+                        <thead>
+                            <tr>
+                                <th>Process</th>
+                                <th>Arrival Time</th>
+                                <th>Burst Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <tr id="empty-row">
+                                <td colspan="4" class="empty-message">No processes added yet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="action-buttons">
+                     <button id="simulate-btn" class="btn btn-primary">🚀 Run Simulation</button>
+                     <button id="clear-btn" class="btn btn-danger">🗑️ Clear All</button>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="section-header">
+                    <h2>Execution Visualization</h2>
+                </div>
+
+                <div class="gantt-wrapper">
+                    <h3 class="subtitle">Gantt Chart</h3>
+                    <div id="gantt-chart" class="gantt-container">
+                        <p class="placeholder-text">Awaiting process data...</p>
+                    </div>
+                </div>
+
+                <div class="metrics-wrapper">
+                    <h3 class="subtitle">Performance Metrics</h3>
+                    <div id="metrics" class="metrics-container">
+                        <div class="metric-card">
+                            <span class="metric-label">Avg Waiting Time</span>
+                            <span class="metric-value" id="avg-wt">0.00 <small>ms</small></span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Avg Turnaround Time</span>
+                            <span class="metric-value" id="avg-tat">0.00 <small>ms</small></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
